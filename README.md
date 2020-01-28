@@ -19,3 +19,5 @@ The time we greeted you.
 uses: AlexAntn/test_actions@v1
 with:
   who-to-greet: 'Mona the Octocat'
+
+![](https://github.com/AlexAntn/test-actions/.github/workflows/main.yml/badge.svg)
