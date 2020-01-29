@@ -3,8 +3,8 @@
 name: Docker Image test
 
 on:
-release:
-types: [published]
+    release:
+        types: [published]
 
 jobs:
     build:
