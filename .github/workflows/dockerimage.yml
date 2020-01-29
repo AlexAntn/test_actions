@@ -4,7 +4,7 @@ name: Docker Image test
 
 on:
     release:
-        types: [push] #[published]
+        types: [push] 
 
 jobs:
     build:
