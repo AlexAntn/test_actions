@@ -19,8 +19,8 @@ jobs:
             - name: Build the tagged Docker image
               run: docker build . --file Dockerfile --tag alexantn/test_actions:${{steps.vars.outputs.tag}}
             - name: Push the tagged Docker image
-              run: docker push alexantn/test_actions:${{steps.vars.outputs.tag}}
+              run: docker push alexantn88/github_actions_try:${{steps.vars.outputs.tag}}
             - name: Build the latest Docker image
               run: docker build . --file Dockerfile --tag alexantn/test_actions:latest
             - name: Push the latest Docker image
-              run: docker push alexantn/test_actions:latest
+              run: docker push alexantn88/github_actions_try:latest
