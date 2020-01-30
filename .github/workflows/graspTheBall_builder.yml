@@ -1,0 +1,13 @@
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Login to DockerHub Registry
+              run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+            - name: Build graspTheBall Docker image
+              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall
+            - name: Push graspTheBall Docker image
+              run: docker push alexantn88/github_actions_try:graspTheBall
