@@ -16,27 +16,23 @@ jobs:
             - name: Get the version
               id: vars
               run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
-            - name: Build the latest Docker image
+            - name: Build graspTheBall Docker image
               run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall
-            - name: Push the latest Docker image
+            - name: Push graspTheBall Docker image
               run: docker push alexantn88/github_actions_try:graspTheBall
-            - name: Build the latest Docker image
-              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/develop/testPerformancesHead --file Dockerfile --tag alexantn88/github_actions_try:testPerformancesHead
-            - name: Push the latest Docker image
-              run: docker push alexantn88/github_actions_try:testPerformancesHead
-            - name: Build the latest Docker image
+            - name: Build superbuild Docker image
               run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file Dockerfile --tag alexantn88/github_actions_try:superbuild
-            - name: Push the latest Docker image
+            - name: Push superbuild Docker image
               run: docker push alexantn88/github_actions_try:superbuild
-            - name: Build the latest Docker image
+            - name: Build superbuildnvidia Docker image
               run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuildnvidia --file Dockerfile --tag alexantn88/github_actions_try:superbuildnvidia
-            - name: Push the latest Docker image
+            - name: Push superbuildnvidia Docker image
               run: docker push alexantn88/github_actions_try:superbuildnvidia
-            - name: Build the latest Docker image
+            - name: Build superbuild-icubhead Docker image
               run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild-icubhead --file Dockerfile --tag alexantn88/github_actions_try:superbuild-icubhead
-            - name: Push the latest Docker image
+            - name: Push superbuild-icubhead Docker image
               run: docker push alexantn88/github_actions_try:superbuild-icubhead
-            - name: Build the latest Docker image
+            - name: Build ubuntu1804mesa Docker image
               run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/ubuntu1804mesa --file Dockerfile --tag alexantn88/github_actions_try:ubuntu1804mesa
-            - name: Push the latest Docker image
+            - name: Push ubuntu1804mesa Docker image
               run: docker push alexantn88/github_actions_try:ubuntu1804mesa
