@@ -1,6 +1,8 @@
 on: 
-    release:
-        types: [published] 
+    push:
+        paths:
+            - 'test_folder/**'
+            - '!no_change_folder/**'
 
 jobs:
     build:
