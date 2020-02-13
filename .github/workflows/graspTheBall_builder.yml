@@ -9,9 +9,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
+            - name: Get the version
+              id: get_version
+              run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
             - name: Login to DockerHub Registry
               run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             - name: Build graspTheBall Docker image
-              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall_${{ github.ref }}
+              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}
             - name: Push graspTheBall Docker image
-              run: docker push alexantn88/github_actions_try:graspTheBall_${{ github.ref }}
+              run: docker push alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}
