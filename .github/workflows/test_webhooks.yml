@@ -1,6 +1,6 @@
 name: webhook testing
 
-on: repository-dispatch
+on: repository_dispatch
 
 jobs:
   hello_world_job:
@@ -13,6 +13,7 @@ jobs:
       with:
         who-to-greet: Alex
     # Use the output from the `hello` step
+    - run: 'echo "field: ${{ github.event.client_payload.foo }}"'
     - name: Get the output time
-      if: github.event.action == push
+      if: github.event.client_payload.foo == bar
       run: echo "The time was ${{ steps.hello.outputs.time }}"
