@@ -1,19 +1,13 @@
 name: webhook testing
 
-on: repository_dispatch
-
+on:
+  repository_dispatch:
+    types: [my-event]
 jobs:
-  hello_world_job:
+  myEvent:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: AlexAntn/test_actions@v5.1
-      with:
-        who-to-greet: Alex
-    # Use the output from the `hello` step
-    - run: 'echo "field: ${{ github.event.client_payload.foo }}"'
-    - name: Get the output time
-      if: github.event.client_payload.foo == bar
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+      - run: echo ${{ github.event.client_payload.sha }}
