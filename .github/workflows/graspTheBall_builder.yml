@@ -17,10 +17,10 @@ jobs:
             - name: Login to DockerHub Registry
               run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             - name: Build graspTheBall Docker image
-              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}_${eval ${VERSION_TEST}}
+              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall --file Dockerfile --tag alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}_'eval ${VERSION_TEST}'
               env:
                     VERSION_TEST: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
             - name: Push graspTheBall Docker image
-              run: docker push alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}_${eval ${VERSION_TEST}}
+              run: docker push alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}_'eval ${VERSION_TEST}'
               env:
                     VERSION_TEST: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
