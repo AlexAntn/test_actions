@@ -9,10 +9,10 @@ jobs:
             - uses: actions/checkout@v2
             - run: echo "::set-env name=VERSION_TEST::${vari}"
               env:
-                  vari: "$(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)"
+                  vari: $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
             - run: echo ${VERSION_TEST}
             - run: eval ${VERSION_TEST}
               env: 
-                    VERSION_TEST: "$(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)"
+                    VERSION_TEST: $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
             - run: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
 
