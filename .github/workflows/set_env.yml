@@ -7,9 +7,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - run: echo "::set-env name=VERSION_TEST::'eval ${grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json}'"
             - run: echo ${VERSION_TEST}
-              env: 
-                    VERSION_TEST: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
             - run: eval ${VERSION_TEST}
               env: 
                     VERSION_TEST: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
