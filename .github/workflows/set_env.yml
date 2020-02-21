@@ -9,5 +9,5 @@ jobs:
             - uses: actions/checkout@v2
             - run: echo ${VERSION_TEST}
               env: 
-                    VERSION_TEST: $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
+                    VERSION_TEST: eval $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
             - run: grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json
