@@ -14,16 +14,23 @@ jobs:
           run: if [${{ github.event.payload.event-type }} == "trigger"]; then [echo '${{ github.event.client_payload.version }}']; fi
           
         - name: Check all event
+          run: echo '${{ github.event.payload }}'
+        - name: Check all event
+          run: echo '${{ github.event.payload.types }}'
+        - name: Check all event
+          run: echo '${{ github.event.payload.event-types }}'
+          
+        - name: Check all event
           run: echo '${{ github.event.client_payload }}'
           
         - name: Check all event
           run: echo '${{ github.event.client_payload.event-type }}'
           
         - name: Check all event
-          run: echo '${{ github.event.client_payload.type }}'
+          run: echo '${{ github.event.client_payload.types }}'
           
         - name: Check all event
-          run: echo '${{ github.event.repository_dispatch.type }}'
+          run: echo '${{ github.event.repository_dispatch.types }}'
 
 #        - name: change file
 #          run: |
