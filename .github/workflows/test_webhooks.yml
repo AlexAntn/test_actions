@@ -14,25 +14,34 @@ jobs:
           run: if [${{ github.event.payload.event-type }} == "trigger"]; then [echo '${{ github.event.client_payload.version }}']; fi
           
         - name: Check all event
-          run: echo '${{ github.event.payload }}'
+          run: echo '${{ github.event.client_payload }}'
+          
+        - name: Check all event
+          run: echo '${{ github.event.client_payload.event-type }}'
+          
+        - name: Check all event
+          run: echo '${{ github.event.client_payload.type }}'
+          
+        - name: Check all event
+          run: echo '${{ github.event.repository_dispatch.type }}'
 
-        - name: change file
-          run: |
-                ls
-                cat ./testing
-                echo '${{ github.event.client_payload.version }}' >> ./testing
-                cat ./testing
-          env:
-                CI: true
-        - name: Commit files
-          run: |
-                echo ${{ github.ref }}
-                git add ./*
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
-                git commit -m "ci: Automated build push" -a | exit 0
-        - name: Push changes
-          if: github.ref == 'refs/heads/master'
-          uses: ad-m/github-push-action@master
-          with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
+#        - name: change file
+#          run: |
+#                ls
+#                cat ./testing
+#                echo '${{ github.event.client_payload.version }}' >> ./testing
+#                cat ./testing
+#          env:
+#                CI: true
+#        - name: Commit files
+#          run: |
+#                echo ${{ github.ref }}
+#                git add ./*
+#                git config --local user.email "action@github.com"
+#                git config --local user.name "GitHub Action"
+#                git commit -m "ci: Automated build push" -a | exit 0
+#        - name: Push changes
+#          if: github.ref == 'refs/heads/master'
+#          uses: ad-m/github-push-action@master
+#          with:
+#                github_token: ${{ secrets.GITHUB_TOKEN }}
