@@ -11,10 +11,10 @@ jobs:
         - run: echo ${{ github.event.client_payload.version }}
 
         - name: Check AppsAway version
-          run: if [${{ github.event.client_payload.type }} == "trigger"]; then [echo '${{ github.event.client_payload.version }}']; fi
+          run: if [${{ github.event.payload.event-type }} == "trigger"]; then [echo '${{ github.event.client_payload.version }}']; fi
           
         - name: Check all event
-          run: echo '${{ github.event.client_payload }}'
+          run: echo '${{ github.event.payload }}'
 
         - name: change file
           run: |
