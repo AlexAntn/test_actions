@@ -13,7 +13,7 @@ jobs:
                   echo "./SB_version.json" > VERSIONFILE_NAME
                   #
                   # Logically defined variable from the Dockerfile
-                  cat $(cat VERSIONFILE_NAME) | grep '"version" :'= | head -n 1 | grep -o 'v[1-9]{1,}\..{1,}(?=\"\})' | sed 's/"//g' > VERSION_TEST
+                  cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' > VERSION_TEST
 
             - run: echo "tag = $(cat VERSION_TEST)"
             - run:  ${VERSION_TEST}
