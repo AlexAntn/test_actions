@@ -7,10 +7,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - run: echo ${VERSION_TEST}
-              env:
-                  VERSION_TEST: $(cat ./SB_version.json | grep '"version" :'= | head -n 1 | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})') #| sed 's/"//g')
-                  #vari: eval $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
+            - name: Define variables
+              run: |
+                  # Hard coded variable
+                  echo "./SB_version.json" > VERSIONFILE_NAME
+                  #
+                  # Logically defined variable from the Dockerfile
+                  cat $(cat VERSIONFILE_NAME) | grep '"version" :'= | head -n 1 | grep -o 'v[1-9]{1,}\..{1,}(?=\"\})' | sed 's/"//g' > VERSION_TEST
+
+            - run: echo "tag = $(cat VERSION_TEST)"
             - run:  ${VERSION_TEST}
               env: 
                     VERSION_TEST: $(grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' ./SB_version.json)
