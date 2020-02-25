@@ -17,9 +17,9 @@ jobs:
           run: echo '${{ github.event.payload }}'
           
         - name: Check all event
-          run: echo 'JSON.stringify(JSON.parse(decodeURIComponent(github.event)), null, 4)'
+          run: echo '$(JSON.stringify(JSON.parse(decodeURIComponent(github.event)), null, 4))'
         - name: Check all event
-          run: echo 'JSON.stringify(JSON.parse(decodeURIComponent(github.event.client_payload)), null, 4)'
+          run: echo '$(JSON.stringify(JSON.parse(decodeURIComponent(github.event.client_payload)), null, 4))'
           
         - name: Check all event
           run: echo '${{ github.event.client_payload }}'
