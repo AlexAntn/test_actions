@@ -19,10 +19,8 @@ jobs:
                   # Hard coded variable
                   echo "./SB_version.json" > VERSIONFILE_NAME
                   cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' > VERSION_TEST
-              run: |
                   echo "alexantn88/github_actions_try:graspTheBall_${{ steps.get_version.outputs.VERSION }}_$(cat VERSION_TEST)" > IMAGE_TAG
                   echo $(cat IMAGE_TAG)
-              run: |
                   echo "https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall" > IMAGE_BUILD
                   echo $(cat IMAGE_BUILD)
 
