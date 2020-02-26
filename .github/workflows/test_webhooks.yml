@@ -15,7 +15,7 @@ jobs:
           run: if [ "${{ github.event.client_payload.type }}" == "trigger" ]; then echo '${{ github.event.client_payload.version }}'; fi
 
         - name: set Superbuild version
-          run: if [ "${{ github.event.client_payload.type }}" == "trigger2" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_TEST); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]+\..{1,}(?=\"\})' > VERSION_TEST; fi
+          run: if [ "${{ github.event.client_payload.type }}" == "trigger2" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_TEST); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9].(?=\"\})' > VERSION_TEST; fi
 
         - run: echo "tag = $(cat VERSION_TEST)" > VERSION_TEST
         - run: echo $(cat VERSION_TEST)
