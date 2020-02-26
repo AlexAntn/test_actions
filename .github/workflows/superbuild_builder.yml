@@ -44,10 +44,10 @@ jobs:
                 echo $(cat START_IMAGE_TAG)
                 
             - name: test of the build
-              run: echo "--build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)"
+              run: echo "docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)"
 
             - name: Build superbuild Docker full image
-              run: docker build $(echo "--build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)")
+              run: docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
             - name: Push superbuild Docker full image
               run: docker push $(cat SB_DOCKER_TAG_FULL)
 
