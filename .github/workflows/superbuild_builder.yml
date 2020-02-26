@@ -24,11 +24,7 @@ jobs:
 
 # This block creates the "string" that will serve as the tag argument in docker build
             - name: set builder tag for Superbuild full
-              run: echo "icubteamcode/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
-
-# This block creates the "string" that will serve as the tag argument in docker build thin
-            - name: set builder tag for Superbuild full
-              run: echo "icubteamcode/superbuild:${VERSION_FILE}_devel_prod" > SB_DOCKER_TAG_PROD
+              run: echo "alexantn88/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
 
 # this block reads the date and sets it as an argument for build
             - name: set date argument for Docker build
@@ -44,12 +40,7 @@ jobs:
                 echo $(cat START_IMAGE_TAG)
 
             - name: Build superbuild Docker full image
-              run: docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG) ./dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
+              run: docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
             - name: Push superbuild Docker full image
               run: docker push $(cat SB_DOCKER_TAG_FULL)
-#
-            - name: Build superbuild Docker thin image
-              run: docker build  ./dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile4Production --tag $(cat SB_DOCKER_TAG_PROD)
-            - name: Push superbuild Docker thin image
-              run: docker push $(cat SB_DOCKER_TAG_PROD)
 
