@@ -12,6 +12,11 @@ jobs:
 
         - name: Check AppsAway version
           run: if [ "${{ github.event.client_payload.type }}" == "trigger" ]; then echo '${{ github.event.client_payload.version }}'; fi
+
+        - name: set environment variable
+          run: if [ "${{ github.event.client_payload.type }}" == "trigger" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_TEST | cut -d / -f 3); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' > VERSION_TEST; fi
+
+        - run: echo "tag = $(cat VERSION_TEST)"
       
 
 #        - name: change file
