@@ -34,7 +34,7 @@ jobs:
             - name: set date argument for Docker build
               run: |
                 echo "$(date +'%d/%m/%Y')" > DATE_TAG
-                echo metadata="\x22built on "$(cat DATE_TAG)"\x22" > DATE_TAG
+                echo -e metadata="\x22built on "$(cat DATE_TAG)"\x22" > DATE_TAG
                 echo $(cat DATE_TAG)
 
 # this block sets the starting image for Docker build
@@ -42,9 +42,12 @@ jobs:
               run: |
                 echo "STARTING_IMG_NAME=icubteamcode/ubuntu1804mesa:latest" > START_IMAGE_TAG
                 echo $(cat START_IMAGE_TAG)
+                
+            - name: test of the build
+              run: echo '--build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)'
 
             - name: Build superbuild Docker full image
-              run: docker build --build-arg ${cat START_IMAGE_TAG} --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
+              run: docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG)  https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
             - name: Push superbuild Docker full image
               run: docker push $(cat SB_DOCKER_TAG_FULL)
 
