@@ -27,7 +27,7 @@ jobs:
 # This block creates the "string" that will serve as the tag argument in docker build
             - name: set builder tag for Superbuild full
               run: |
-                echo "alexantn88/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
+                echo "alexantn88/superbuild:$(cat VERSION_FILE)_devel_full" > SB_DOCKER_TAG_FULL
                 echo $(cat SB_DOCKER_TAG_FULL)
 
 # this block reads the date and sets it as an argument for build
