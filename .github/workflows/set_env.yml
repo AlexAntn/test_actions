@@ -16,4 +16,5 @@ jobs:
                   cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' > VERSION_TEST
 
             - run: echo "tag = $(cat VERSION_TEST)"
+            - run: echo "$(date +'%d')"
 
