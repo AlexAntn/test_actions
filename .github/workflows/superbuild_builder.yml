@@ -20,11 +20,15 @@ jobs:
 # it gets the version directly from the payload. Otherwise, it gets the release from the information
 # stored on our own SB_version.json file. The tag is saved on a temporary file VERSION_FILE.
             - name: set Superbuild version
-              run: if [ "${{ github.event.client_payload.type }}" == "superbuild_release" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_FILE); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})' > VERSION_FILE; fi
+              run: |
+                if [ "${{ github.event.client_payload.type }}" == "superbuild_release" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_FILE); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})' > VERSION_FILE; fi
+                echo $(cat VERSION_FILE)
 
 # This block creates the "string" that will serve as the tag argument in docker build
             - name: set builder tag for Superbuild full
-              run: echo "alexantn88/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
+              run: |
+                echo "alexantn88/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
+                echo $(cat SB_DOCKER_TAG_FULL)
 
 # this block reads the date and sets it as an argument for build
             - name: set date argument for Docker build
