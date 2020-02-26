@@ -7,7 +7,49 @@ jobs:
             - uses: actions/checkout@v1
             - name: Login to DockerHub Registry
               run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-            - name: Build superbuild Docker image
-              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file Dockerfile --tag alexantn88/github_actions_try:superbuild
-            - name: Push superbuild Docker image
-              run: docker push alexantn88/github_actions_try:superbuild
+
+#            - name: Build superbuild Docker image
+#              run: docker build https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/basic/superbuild --file Dockerfile --tag alexantn88/github_actions_try:superbuild
+#            - name: Push superbuild Docker image
+#              run: docker push alexantn88/github_actions_try:superbuild
+
+            - name: Check AppsAway version
+              run: if [ "${{ github.event.client_payload.type }}" == "AppsAway_update" ]; then echo '${{ github.event.client_payload.version }}'; fi
+
+# this block sets the superbuild version tag. If it was triggered by the superbuild release, then
+# it gets the version directly from the payload. Otherwise, it gets the release from the information
+# stored on our own SB_version.json file. The tag is saved on a temporary file VERSION_FILE.
+            - name: set Superbuild version
+              run: if [ "${{ github.event.client_payload.type }}" == "superbuild_release" ]; then $(echo ${{ github.event.client_payload.version }} > VERSION_FILE); else echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})' > VERSION_FILE; fi
+
+# This block creates the "string" that will serve as the tag argument in docker build
+            - name: set builder tag for Superbuild full
+              run: echo "icubteamcode/superbuild:${VERSION_FILE}_devel_full" > SB_DOCKER_TAG_FULL
+
+# This block creates the "string" that will serve as the tag argument in docker build thin
+            - name: set builder tag for Superbuild full
+              run: echo "icubteamcode/superbuild:${VERSION_FILE}_devel_prod" > SB_DOCKER_TAG_PROD
+
+# this block reads the date and sets it as an argument for build
+            - name: set date argument for Docker build
+              run: |
+                echo "$(date +'%d/%m/%Y')" > DATE_TAG
+                echo 'metadata="built on $(cat DATE_TAG)"' > DATE_TAG
+                echo $(cat DATE_TAG)
+
+# this block sets the starting image for Docker build
+            - name: set starting image argument for Docker build
+              run: |
+                echo "STARTING_IMG_NAME=icubteamcode/ubuntu1804mesa:latest" > START_IMAGE_TAG
+                echo $(cat START_IMAGE_TAG)
+
+            - name: Build superbuild Docker full image
+              run: docker build --build-arg $(cat START_IMAGE_TAG) --build-arg $(cat DATE_TAG) ./dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile --tag $(cat SB_DOCKER_TAG_FULL)
+            - name: Push superbuild Docker full image
+              run: docker push $(cat SB_DOCKER_TAG_FULL)
+#
+            - name: Build superbuild Docker thin image
+              run: docker build  ./dockerfile_images/basic/superbuild --file ./dockerfile_images/basic/superbuild/Dockerfile4Production --tag $(cat SB_DOCKER_TAG_PROD)
+            - name: Push superbuild Docker thin image
+              run: docker push $(cat SB_DOCKER_TAG_PROD)
+
