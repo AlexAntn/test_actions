@@ -34,7 +34,7 @@ jobs:
             - name: set date argument for Docker build
               run: |
                 echo "$(date +'%d/%m/%Y')" > DATE_TAG_TEMP
-                echo -e "metadata=\x22built_on_$(cat DATE_TAG_TEMP)\x22" > DATE_TAG
+                echo "metadata=$(cat DATE_TAG_TEMP)" > DATE_TAG
                 echo $(cat DATE_TAG)
 
 # this block sets the starting image for Docker build
