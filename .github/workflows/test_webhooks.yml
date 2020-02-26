@@ -1,6 +1,7 @@
 name: webhook testing
 
 on:
+  push:
   repository_dispatch:
     types: [trigger]
 jobs:
