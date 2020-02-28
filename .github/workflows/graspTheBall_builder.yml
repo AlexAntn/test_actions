@@ -24,7 +24,7 @@ jobs:
 
             - name: Define Image Tag
               run:
-                  echo "docker.pkg.github.com/alexantn/test_actions/grasptheball:${{ steps.get_version.outputs.VERSION }}_$(cat VERSION_TEST)" > IMAGE_TAG
+                  echo "docker.pkg.github.com/alexantn/test_actions/grasptheball:${{ steps.get_version.outputs.VERSION }}\_$(cat VERSION_TEST)" > IMAGE_TAG
                   echo $(cat IMAGE_TAG)
 
             - name: Define Image build path
