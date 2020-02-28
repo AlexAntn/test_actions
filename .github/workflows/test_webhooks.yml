@@ -1,9 +1,13 @@
 name: webhook testing
 
-on:
-  push:
-  repository_dispatch:
-    types: [trigger]
+
+on: 
+    push:
+        paths: 
+            - '.github/workflows/test_webhooks.yml'
+
+    repository_dispatch:
+        types: [trigger]
 jobs:
   myEvent:
     runs-on: ubuntu-latest

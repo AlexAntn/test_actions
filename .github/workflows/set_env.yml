@@ -1,6 +1,10 @@
 name: load json file
 
-on: push
+on: 
+    push:
+        paths: 
+            - '.github/workflows/set_env.yml'
+
 
 jobs:
     build:
