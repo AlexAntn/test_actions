@@ -35,7 +35,7 @@ jobs:
                   echo $(cat IMAGE_BUILD)
 
             - name: Login to DockerHub Registry
-              run: docker login -u AlexAntn -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com --password-stdin
+              run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u AlexAntn docker.pkg.github.com --password-stdin
 
             - name: Build graspTheBall Docker image
               run: docker build $(cat IMAGE_BUILD) --file Dockerfile4Production --tag $(cat IMAGE_TAG)
