@@ -14,13 +14,21 @@ jobs:
             - name: Get the version
               id: get_version
               run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
-            - name: Define variables
+
+            - name: Define version
               run: |
                   # Hard coded variable
                   echo "./SB_version.json" > VERSIONFILE_NAME
-                  cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}\..{1,}(?=\"\})' > VERSION_TEST
+                  cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})' > VERSION_TEST
+                  echo $(cat VERSION_TEST)
+
+            - name: Define Image Tag
+              run:
                   echo "docker.pkg.github.com/alexantn/test_actions/graspTheBall:${{ steps.get_version.outputs.VERSION }}_$(cat VERSION_TEST)" > IMAGE_TAG
                   echo $(cat IMAGE_TAG)
+
+            - name: Define Image build path
+              run:
                   echo "https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall" > IMAGE_BUILD
                   echo $(cat IMAGE_BUILD)
 
