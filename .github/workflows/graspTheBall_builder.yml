@@ -40,3 +40,5 @@ jobs:
 
             - name: Push graspTheBall Docker image
               run: docker push $(cat IMAGE_TAG)
+              with:
+                repo-token: ${{ secrets.GITHUB_TOKEN }}
