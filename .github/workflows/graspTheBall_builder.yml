@@ -34,13 +34,11 @@ jobs:
                   echo "https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall" > IMAGE_BUILD
                   echo $(cat IMAGE_BUILD)
 
-#            - name: Login to DockerHub Registry
-#              run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+            - name: Login to DockerHub Registry
+              run: docker login -u AlexAntn -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
 
             - name: Build graspTheBall Docker image
               run: docker build $(cat IMAGE_BUILD) --file Dockerfile4Production --tag $(cat IMAGE_TAG)
 
             - name: Push graspTheBall Docker image
               run: docker push $(cat IMAGE_TAG)
-              with:
-                repo-token: ${{ secrets.GITHUB_TOKEN }}
