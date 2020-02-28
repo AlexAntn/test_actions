@@ -23,12 +23,12 @@ jobs:
                   echo $(cat VERSION_TEST)
 
             - name: Define Image Tag
-              run:
-                  echo "docker.pkg.github.com/alexantn/test_actions/grasptheball:${{ steps.get_version.outputs.VERSION }}\_$(cat VERSION_TEST)" > IMAGE_TAG
+              run: |
+                  echo "docker.pkg.github.com/alexantn/test_actions/grasptheball:${{ steps.get_version.outputs.VERSION }}_$(cat VERSION_TEST)" > IMAGE_TAG
                   echo $(cat IMAGE_TAG)
 
             - name: Define Image build path
-              run:
+              run: |
                   echo "https://${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_PASSWORD }}@github.com/icub-tech-iit/code.git#master:dockerfile_images/demos/graspTheBall" > IMAGE_BUILD
                   echo $(cat IMAGE_BUILD)
 
