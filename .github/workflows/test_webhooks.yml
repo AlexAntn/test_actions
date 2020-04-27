@@ -27,7 +27,7 @@ jobs:
                   git config --local user.name "GitHub Action"
                   git commit -m "updated Version file" -a
                 fi
-                echo $( cat ./SB_version.json )
+                echo "$( cat ./SB_version.json )"
     
         - name: push changes
           uses: ad-m/github-push-action@master
