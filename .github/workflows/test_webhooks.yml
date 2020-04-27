@@ -22,9 +22,9 @@ jobs:
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "trigger2" ]
                 then
-                  $(echo ${{ github.event.client_payload.version }} > ./SB_version.json
+                  $(echo ${{ github.event.client_payload.version }} ) > ./SB_version.json
                 fi
-                echo $(cat ./SB_version.json)
+                echo $( cat ./SB_version.json )
 
         - name: commit changes
           run: |
