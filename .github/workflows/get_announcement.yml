@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
-        - run: echo ${{ github.event.client_payload.announcement }}
 
         - name: Check AppsAway version
           run: if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]; then echo '${{ github.event.client_payload.announcement }}'; fi
