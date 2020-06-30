@@ -1,0 +1,48 @@
+name: webhook testing announcements
+
+
+
+on: 
+    repository_dispatch:
+        types: [announcement-launched]
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - run: echo ${{ github.event.client_payload.announcement }}
+
+        - name: Check AppsAway version
+          run: if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]; then echo '${{ github.event.client_payload.announcement }}'; fi
+
+        - run: |
+                if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]
+                then
+                  echo ${{ github.event.client_payload.announcement }} > temp.md  # create two example files
+                  # this will also include README.md
+                  echo "::set-env name=FILELIST::$(printf '"%s" ' *.md)"
+                fi
+        - uses: docker://pandoc/latex:2.9
+          with:
+            args: --output=result.html ${{ env.FILELIST }}
+        - name: commit the file
+          run: |
+                if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]
+                then
+                  echo "{\"version\" : \"${{ github.event.client_payload.version }}\"}" > ./SB_version.json
+                  git config --local user.email "actions@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add result.html
+                  git commit -m "updated announcement file"
+                fi
+
+        - name: push changes
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+
+
+
