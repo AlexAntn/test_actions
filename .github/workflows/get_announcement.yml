@@ -18,12 +18,10 @@ jobs:
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo '${{ github.event.client_payload.announcement }}' > temp.md  # create two example files
-                  # this will also include README.md
-                  echo "::set-env name=FILELIST::$(printf '"%s" ' *.md)"
                 fi
         - uses: docker://pandoc/latex:2.9
           with:
-            args: --output=result.html ${{ env.FILELIST }}
+            args: --output=result.html temp.md
         - name: commit the file
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
