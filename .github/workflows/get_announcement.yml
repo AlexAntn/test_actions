@@ -4,7 +4,7 @@ name: webhook testing announcements
 
 on: 
     repository_dispatch:
-        types: [announcement-launched]
+        types: [announcement_launched]
 jobs:
   myEvent:
     runs-on: ubuntu-latest
@@ -13,10 +13,10 @@ jobs:
         - run: echo ${{ github.event.client_payload.announcement }}
 
         - name: Check AppsAway version
-          run: if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]; then echo '${{ github.event.client_payload.announcement }}'; fi
+          run: if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]; then echo '${{ github.event.client_payload.announcement }}'; fi
 
         - run: |
-                if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]
+                if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo ${{ github.event.client_payload.announcement }} > temp.md  # create two example files
                   # this will also include README.md
@@ -27,7 +27,7 @@ jobs:
             args: --output=result.html ${{ env.FILELIST }}
         - name: commit the file
           run: |
-                if [ "${{ github.event.client_payload.type }}" == "announcement-launched" ]
+                if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo "{\"version\" : \"${{ github.event.client_payload.version }}\"}" > ./SB_version.json
                   git config --local user.email "actions@github.com"
