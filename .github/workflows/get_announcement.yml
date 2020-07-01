@@ -27,7 +27,15 @@ jobs:
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   announce=$(cat result.html)
-                  echo '\n{\n"id": "${{ github.event.client_payload.id }}",\n"title": "${{ github.event.client_payload.title }}",\n"date": "${{ github.event.client_payload.date }}",\n"summary": "${{ github.event.client_payload.summary }}",\n"description": "$announce",\n"image": "${{ github.event.client_payload.image }}"\n}' >> test.json
+                  echo '{' >> test.json
+                  echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
+                  echo '"title"         : "${{ github.event.client_payload.title }}"', >> test.json
+                  echo '"date"          : "${{ github.event.client_payload.date }}"', >> test.json
+                  echo '"summary"       : "${{ github.event.client_payload.summary }}"', >> test.json
+                  echo '"description"   : $announce,' >> test.json
+                  echo '"image"         : "${{ github.event.client_payload.image }}"' >> test.json
+                  echo '}' >> test.json
+                fi
         - name: commit the file
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
