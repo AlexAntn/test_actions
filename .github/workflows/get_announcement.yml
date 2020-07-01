@@ -29,7 +29,7 @@ jobs:
                 then
                   echo '${{ github.event.client_payload.description }}' > temp.txt
                   awk -v ORS='\\n' '1' temp.txt > temp1.txt
-                  sed 's/\r//' temp1.txt > temp2.txt
+                  sed 's/\r//g' temp1.txt > temp2.txt
                   announce="$(cat temp2.txt)"
                   echo $announce
                   echo '{' >> test.json
