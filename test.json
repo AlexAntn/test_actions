@@ -121,3 +121,11 @@
 "description"   : $announce ,
 "image"         : "???"
 }
+{
+"id"            : "202007",
+"title"         : "Test",
+"date"          : "July 2020",
+"summary"       : "???",
+"description"   : $( awk -v ORS=\n 1 temp.txt ) ,
+"image"         : "???"
+}
