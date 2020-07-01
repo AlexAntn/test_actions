@@ -27,7 +27,7 @@ jobs:
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo '${{ github.event.client_payload.description }}' > temp.md
-                  sed ':a;N;$!ba;s/\n/\\n/g' temp.md > temp.md
+                  sed ':a;N;$!ba;s/\n/\\n/g' temp.md > temp2.md
                   announce="$(cat temp.md)"
                   echo "$announce"
                   echo '{' >> test.json
@@ -45,7 +45,7 @@ jobs:
                 then
                   git config --local user.email "actions@github.com"
                   git config --local user.name "GitHub Action"
-                  git add temp.md test.json
+                  git add temp.md temp2.md test.json
                   git commit -m "updated announcement file"
                 fi
 
