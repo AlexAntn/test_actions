@@ -11,17 +11,17 @@ jobs:
     steps:
         - uses: actions/checkout@v2
 
-        - name: Check AppsAway version
+        - name: Check dispatch type
           run: if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]; then echo '${{ github.event.client_payload.description }}'; fi
 
-        - run: |
-                if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
-                then
-                  echo '${{ github.event.client_payload.description }}' > temp.md  # create two example files
-                fi
-        - uses: docker://pandoc/latex:2.9
-          with:
-            args: --output=result.html temp.md
+#        - run: |
+#                if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
+#                then
+#                  echo '${{ github.event.client_payload.description }}' > temp.md  # create two example files
+#                fi
+#        - uses: docker://pandoc/latex:2.9
+#          with:
+#            args: --output=result.html temp.md
         - name: populate the DB
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
@@ -33,7 +33,7 @@ jobs:
                   echo '"title"         : "${{ github.event.client_payload.title }}",' >> test.json
                   echo '"date"          : "${{ github.event.client_payload.date }}",' >> test.json
                   echo '"summary"       : "${{ github.event.client_payload.summary }}",' >> test.json
-                  echo "\"description\"   : \"$(cat result.html)\"," >> test.json
+                  echo '"description"   : "${{ github.event.client_payload.description }}",' >> test.json
                   echo '"image"         : "${{ github.event.client_payload.image }}"' >> test.json
                   echo '}' >> test.json
                 fi
@@ -43,7 +43,7 @@ jobs:
                 then
                   git config --local user.email "actions@github.com"
                   git config --local user.name "GitHub Action"
-                  git add result.html test.json
+                  git add test.json
                   git commit -m "updated announcement file"
                 fi
 
