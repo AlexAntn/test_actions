@@ -12,26 +12,32 @@ jobs:
         - uses: actions/checkout@v2
 
         - name: Check AppsAway version
-          run: if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]; then echo '${{ github.event.client_payload.announcement }}'; fi
+          run: if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]; then echo '${{ github.event.client_payload.description }}'; fi
 
         - run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
-                  echo '${{ github.event.client_payload.announcement }}' > temp.md  # create two example files
+                  echo '${{ github.event.client_payload.description }}' > temp.md  # create two example files
                 fi
         - uses: docker://pandoc/latex:2.9
           with:
             args: --output=result.html temp.md
+        - name: populate the DB
+          run: |
+                if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
+                then
+                  announce=$(cat result.html)
+                  echo '\n{\n"id": "${{ github.event.client_payload.id }}",\n"title": "${{ github.event.client_payload.title }}",\n"date": "${{ github.event.client_payload.date }}",\n"summary": "${{ github.event.client_payload.summary }}",\n"description": "$announce",\n"image": "${{ github.event.client_payload.image }}"\n}' >> test.json
         - name: commit the file
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
-                  echo "{\"version\" : \"${{ github.event.client_payload.version }}\"}" > ./SB_version.json
                   git config --local user.email "actions@github.com"
                   git config --local user.name "GitHub Action"
-                  git add result.html
+                  git add result.html test.json
                   git commit -m "updated announcement file"
                 fi
+
 
         - name: push changes
           uses: ad-m/github-push-action@master
