@@ -153,3 +153,11 @@
 "description"   : $(announce) ,
 "image"         : "???"
 }
+{
+"id"            : "202007",
+"title"         : "Test",
+"date"          : "July 2020",
+"summary"       : "???",
+'description'   :  ,
+"image"         : "???"
+}
