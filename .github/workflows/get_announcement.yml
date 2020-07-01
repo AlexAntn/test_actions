@@ -29,8 +29,8 @@ jobs:
                 then
                   echo '${{ github.event.client_payload.description }}' > temp.txt
                   awk -v ORS='\\n' '1' temp.txt > temp1.txt
-                  dos2unix temp1.txt
-                  announce="$(cat temp1.txt)"
+                  sed 's/\r//' temp1.txt > temp2.txt
+                  announce="$(cat temp2.txt)"
                   echo $announce
                   echo '{' >> test.json
                   echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
@@ -47,7 +47,7 @@ jobs:
                 then
                   git config --local user.email "actions@github.com"
                   git config --local user.name "GitHub Action"
-                  git add temp.txt test.json
+                  git add test.json
                   git commit -m "updated announcement file"
                 fi
 
