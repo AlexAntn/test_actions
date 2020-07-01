@@ -27,12 +27,13 @@ jobs:
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   announce=$(cat result.html)
+                  echo "$announce"
                   echo '{' >> test.json
                   echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
-                  echo '"title"         : "${{ github.event.client_payload.title }}"', >> test.json
-                  echo '"date"          : "${{ github.event.client_payload.date }}"', >> test.json
-                  echo '"summary"       : "${{ github.event.client_payload.summary }}"', >> test.json
-                  echo '"description"   : "$(cat result.html)",' >> test.json
+                  echo '"title"         : "${{ github.event.client_payload.title }}",' >> test.json
+                  echo '"date"          : "${{ github.event.client_payload.date }}",' >> test.json
+                  echo '"summary"       : "${{ github.event.client_payload.summary }}",' >> test.json
+                  echo "\"description\"   : \"$(cat result.html)\"," >> test.json
                   echo '"image"         : "${{ github.event.client_payload.image }}"' >> test.json
                   echo '}' >> test.json
                 fi
