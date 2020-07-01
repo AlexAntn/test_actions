@@ -22,20 +22,21 @@ jobs:
 #        - uses: docker://pandoc/latex:2.9
 #          with:
 #            args: --output=result.html temp.md
+#                  echo "$announce"
         - name: populate the DB
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo '${{ github.event.client_payload.description }}' > temp.txt
-                  awk -v ORS='\\n' '1' temp.txt
-                  announce="$(cat temp.txt)"
-                  echo "$announce"
+                  awk -v ORS='\\n' '1' temp.txt > temp1.txt
+                  announce="$(cat temp1.txt)"
+                  echo $announce
                   echo '{' >> test.json
                   echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
                   echo '"title"         : "${{ github.event.client_payload.title }}",' >> test.json
                   echo '"date"          : "${{ github.event.client_payload.date }}",' >> test.json
                   echo '"summary"       : "${{ github.event.client_payload.summary }}",' >> test.json
-                  echo '"description"   : $announce ,' >> test.json
+                  echo '"description"   : $( awk -v ORS='\\n' '1' temp.txt ) ,' >> test.json
                   echo '"image"         : "${{ github.event.client_payload.image }}"' >> test.json
                   echo '}' >> test.json
                 fi
