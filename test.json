@@ -46,3 +46,11 @@
 "description"   : $(cat result.html),
 "image"         : "???"
 }
+{
+"id"            : "202007",
+"title"         : "Test",
+"date"          : "July 2020",
+"summary"       : "???",
+"description"   : "$(cat result.html)",
+"image"         : "???"
+}
