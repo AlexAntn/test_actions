@@ -38,7 +38,12 @@ jobs:
                   echo '"date"          : "${{ github.event.client_payload.date }}",' >> test.json
                   echo '"summary"       : "${{ github.event.client_payload.summary }}",' >> test.json
                   echo "\"description\"   : \"$announce \"," >> test.json
-                  echo '"image"         : "${{ github.event.client_payload.image }}"' >> test.json
+                  if [[ "${{ github.event.client_payload.release }}" == "true" ]]
+                  then
+                    echo '"image"         : "default image for release"' >> test.json
+                  else
+                    echo '"image"         : "default image for announcement"' >> test.json
+                  fi
                   echo '}' >> test.json
                 fi
         - name: commit the file
