@@ -265,3 +265,11 @@
 "description"   : "This is testing a release!\n\n### Brief description of the announcement\n\nIt should be true on the other side now\n\n### Detailed context\n ",
 "image"         : "default image for release"
 }
+{
+"id"            : "202007",
+"title"         : "Release 4.3.5",
+"date"          : "July 2020",
+"summary"       : "",
+"description"   : "This is testing a release!\n\n### Brief description of the announcement\n\nIt should be true on the other side now\n\n### Detailed context\n ",
+"image"         : "default image for release"
+}
