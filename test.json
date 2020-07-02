@@ -209,3 +209,11 @@
 "description"   : "This is testing a release!\n\nIt should be true on the other side now\n ",
 "image"         : "default image for release"
 }
+{
+"id"            : "202007",
+"title"         : "Test",
+"date"          : "July 2020",
+"summary"       : "???",
+"description"   : "I am testing this thing!\n\n\n**this is bold!**\n\n- this is indexed\n - this is more indexed\n ",
+"image"         : "default image for announcement"
+}
