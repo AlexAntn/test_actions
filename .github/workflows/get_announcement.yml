@@ -19,7 +19,6 @@ jobs:
                   awk -v ORS='\\n' '1' temp.txt > temp1.txt
                   sed 's/\r//g' temp1.txt > temp2.txt
                   announce="$(cat temp2.txt)"
-                  echo $announce
                   echo '{' >> test.json
                   echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
                   echo '"title"         : "${{ github.event.client_payload.title }}",' >> test.json
