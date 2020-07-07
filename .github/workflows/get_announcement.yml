@@ -12,10 +12,12 @@ jobs:
         - uses: actions/checkout@v2
 
         - name: populate the DB
+          env:
+            DESCRIPTION_CONTEXT: ${{ toJson(github.event.client_payload.description) }}
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
-                  echo "${{ github.event.client_payload.description }}" > temp.txt
+                  echo $DESCRIPTION_CONTEXT > temp.txt
                   awk -v ORS='\\n' '1' temp.txt > temp1.txt
                   sed 's/\r//g' temp1.txt > temp2.txt
                   announce="$(cat temp2.txt)"
