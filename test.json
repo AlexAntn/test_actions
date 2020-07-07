@@ -38,3 +38,11 @@
 "description"   : $(cat description.txt),
 "image"         : "default image for release"
 }
+{
+"id"            : ,
+"title"         : ,
+"date"          : ,
+"summary"       : ,
+"description"   : ,
+"image"         : "default image for release"
+}
