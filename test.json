@@ -62,3 +62,11 @@
 "description"   : "This is testing a release! \n \n### Brief description of the announcement \n \nIt should be true on the other side now \n \n### Detailed context \n \n- this is a list \n - it's is a list in a list \n \n \nend of test 👋  \n \nshnrtyj \n![image](https://user-images.githubusercontent.com/9463167/86467557-def90700-bd35-11ea-8067-31ee57cf39f3.png) \n \n- [ ] 1 \n \n- [ ] 2 \n \n- [ ] 3 \n \n`some code` \n \n \n\"this breaks everything",
 "image"         : "default image for release"
 }
+{
+"id"            : "202007",
+"title"         : "Release 4.3.5\"'",
+"date"          : "July 2020",
+"summary"       : "\n\nIt should be true on the other side now\n\n",
+"description"   : "This is testing a release!\n\n### Brief description of the announcement\n\nIt should be true on the other side now\n\n### Detailed context\n\n- this is a list\n - it's is a list in a list\n\n\nend of test 👋 \n\nshnrtyj\n![image](https://user-images.githubusercontent.com/9463167/86467557-def90700-bd35-11ea-8067-31ee57cf39f3.png)\n\n- [ ] 1\n\n- [ ] 2\n\n- [ ] 3\n\n`some code`\n\n\n\"this breaks everything",
+"image"         : "default image for release"
+}
