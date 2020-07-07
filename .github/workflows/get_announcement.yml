@@ -19,22 +19,22 @@ jobs:
                 then
                   echo $DESCRIPTION_CONTEXT > temp.txt
                   echo $(cat temp.txt)
-                  sed -nr 's/.*"id": (.*), "title".*/\1/p' <temp.txt >ID.txt
+                  sed -nr 's/.*"id": "(.*)", "title".*/\1/p' <temp.txt >ID.txt
                   echo $(cat ID.txt)
-                  sed -nr 's/.*"title": (.*), "date".*/\1/p' <temp.txt >title.txt
+                  sed -nr 's/.*"title": "(.*)", "date".*/\1/p' <temp.txt >title.txt
                   echo $(cat title.txt)
-                  sed -nr 's/.*"date": (.*), "summary".*/\1/p' <temp.txt >date.txt
+                  sed -nr 's/.*"date": "(.*)", "summary".*/\1/p' <temp.txt >date.txt
                   echo $(cat date.txt)
-                  sed -nr 's/.*"summary": (.*), "image".*/\1/p' <temp.txt >summary.txt
+                  sed -nr 's/.*"summary": "(.*)", "image".*/\1/p' <temp.txt >summary.txt
                   echo $(cat summary.txt)
-                  sed -nr 's/.*"description": (.*), "id".*/\1/p' <temp.txt >description.txt
+                  sed -nr 's/.*"description": "(.*)", "id".*/\1/p' <temp.txt >description.txt
                   echo $(cat description.txt)
                   echo '{' >> test.json
-                  echo '"id"            : '$(cat ID.txt)',' >> test.json
-                  echo '"title"         : '$(cat title.txt)',' >> test.json
-                  echo '"date"          : '$(cat date.txt)',' >> test.json
-                  echo '"summary"       : '$(cat summary.txt)',' >> test.json
-                  echo '"description"   : '$(cat description.txt)',' >> test.json
+                  echo "\"id\"            : \"$(cat ID.txt)\"," >> test.json
+                  echo "\"title\"         : \"$(cat title.txt)\"," >> test.json
+                  echo "\"date\"          : \"$(cat date.txt)\"," >> test.json
+                  echo "\"summary\"       : \"$(cat summary.txt)\"," >> test.json
+                  echo "\"description\"   : \"$(cat description.txt)\"," >> test.json
                   if [[ "${{ github.event.client_payload.release }}" == "true" ]]
                   then
                     echo '"image"         : "default image for release"' >> test.json
