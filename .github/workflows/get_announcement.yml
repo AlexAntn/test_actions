@@ -17,7 +17,7 @@ jobs:
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
-                  echo $DESCRIPTION_CONTEXT > temp.txt
+                  echo $PAYLOAD_CONTEXT > temp.txt
                   echo $(cat temp.txt)
                   sed -nr 's/.*"id": "(.*)", "title".*/\1/p' <temp.txt >ID.txt
                   echo $(cat ID.txt)
