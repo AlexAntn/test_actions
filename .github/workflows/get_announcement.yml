@@ -19,13 +19,13 @@ jobs:
                 then
                   echo $PAYLOAD_CONTEXT > temp.txt
                   echo $(cat temp.txt)
-                  sed -nr 's/.*"id": "(.*)", "title".*/\1/p' <temp.txt >ID.txt
+                  sed -nr 's/.*"id": "(.*)", "image".*/\1/p' <temp.txt >ID.txt
                   echo $(cat ID.txt)
-                  sed -nr 's/.*"title": "(.*)", "date".*/\1/p' <temp.txt >title.txt
+                  sed -nr 's/.*"title": "(.*)", "type".*/\1/p' <temp.txt >title.txt
                   echo $(cat title.txt)
-                  sed -nr 's/.*"date": "(.*)", "summary".*/\1/p' <temp.txt >date.txt
+                  sed -nr 's/.*"date": "(.*)", "description".*/\1/p' <temp.txt >date.txt
                   echo $(cat date.txt)
-                  sed -nr 's/.*"summary": "(.*)", "image".*/\1/p' <temp.txt >summary.txt
+                  sed -nr 's/.*"summary": "(.*)", "title".*/\1/p' <temp.txt >summary.txt
                   echo $(cat summary.txt)
                   sed -nr 's/.*"description": "(.*)", "id".*/\1/p' <temp.txt >description.txt
                   echo $(cat description.txt)
