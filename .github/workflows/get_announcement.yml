@@ -30,11 +30,11 @@ jobs:
                   sed -nr 's/.*"description": (.*), "id".*/\1/p' <temp.txt >description.txt
                   echo $(cat description.txt)
                   echo '{' >> test.json
-                  echo '"id"            : $(cat ID.txt),' >> test.json
-                  echo '"title"         : $(cat title.txt),' >> test.json
-                  echo '"date"          : $(cat date.txt),' >> test.json
-                  echo '"summary"       : $(cat summary.txt),' >> test.json
-                  echo '"description"   : $(cat description.txt),' >> test.json
+                  echo '"id"            : '$(cat ID.txt)',' >> test.json
+                  echo '"title"         : '$(cat title.txt)',' >> test.json
+                  echo '"date"          : '$(cat date.txt)',' >> test.json
+                  echo '"summary"       : '$(cat summary.txt)',' >> test.json
+                  echo '"description"   : '$(cat description.txt)',' >> test.json
                   if [[ "${{ github.event.client_payload.release }}" == "true" ]]
                   then
                     echo '"image"         : "default image for release"' >> test.json
