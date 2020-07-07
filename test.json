@@ -46,3 +46,11 @@
 "description"   : "This is testing a release!\r\n\r\n### Brief description of the announcement\r\n\r\nIt should be true on the other side now\r\n\r\n### Detailed context\r\n\r\n- this is a list\r\n - it's is a list in a list\r\n\r\n\r\nend of test 👋 \r\n\r\nshnrtyj\r\n![image](https://user-images.githubusercontent.com/9463167/86467557-def90700-bd35-11ea-8067-31ee57cf39f3.png)\r\n\r\n- [ ] 1\r\n\r\n- [ ] 2\r\n\r\n- [ ] 3\r\n\r\n`some code`\r\n\r\n\r\n\"this breaks everything",
 "image"         : "default image for release"
 }
+{
+"id"            : "202007",
+"title"         : "Release 4.3.5\"'",
+"date"          : "July 2020",
+"summary"       : "\r\n\r\nIt should be true on the other side now\r\n\r\n",
+"description"   : "This is testing a release!\r\n\r\n### Brief description of the announcement\r\n\r\nIt should be true on the other side now\r\n\r\n### Detailed context\r\n\r\n- this is a list\r\n - it's is a list in a list\r\n\r\n\r\nend of test 👋 \r\n\r\nshnrtyj\r\n![image](https://user-images.githubusercontent.com/9463167/86467557-def90700-bd35-11ea-8067-31ee57cf39f3.png)\r\n\r\n- [ ] 1\r\n\r\n- [ ] 2\r\n\r\n- [ ] 3\r\n\r\n`some code`\r\n\r\n\r\n\"this breaks everything",
+"image"         : "default image for release"
+}
