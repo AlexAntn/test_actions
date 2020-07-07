@@ -13,20 +13,28 @@ jobs:
 
         - name: populate the DB
           env:
-            DESCRIPTION_CONTEXT: ${{ toJson(github.event.client_payload.description) }}
+            PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
                 then
                   echo $DESCRIPTION_CONTEXT > temp.txt
-                  awk -v ORS='\\n' '1' temp.txt > temp1.txt
-                  sed 's/\r//g' temp1.txt > temp2.txt
-                  announce="$(cat temp2.txt)"
+                  echo $(cat temp.txt)
+                  sed -nr 's/.*"id": (.*), "title".*/\1/p' <temp.txt >ID.txt
+                  echo $(cat ID.txt)
+                  sed -nr 's/.*"title": (.*), "date".*/\1/p' <temp.txt >title.txt
+                  echo $(cat title.txt)
+                  sed -nr 's/.*"date": (.*), "summary".*/\1/p' <temp.txt >date.txt
+                  echo $(cat date.txt)
+                  sed -nr 's/.*"summary": (.*), "image".*/\1/p' <temp.txt >summary.txt
+                  echo $(cat summary.txt)
+                  sed -nr 's/.*"description": (.*), "id".*/\1/p' <temp.txt >description.txt
+                  echo $(cat description.txt)
                   echo '{' >> test.json
-                  echo '"id"            : "${{ github.event.client_payload.id }}",' >> test.json
-                  echo '"title"         : "${{ github.event.client_payload.title }}",' >> test.json
-                  echo '"date"          : "${{ github.event.client_payload.date }}",' >> test.json
-                  echo '"summary"       : "${{ github.event.client_payload.summary }}",' >> test.json
-                  echo "\"description\"   : \"$announce \"," >> test.json
+                  echo '"id"            : $(cat ID.txt),' >> test.json
+                  echo '"title"         : $(cat title.txt),' >> test.json
+                  echo '"date"          : $(cat date.txt),' >> test.json
+                  echo '"summary"       : $(cat summary.txt),' >> test.json
+                  echo '"description"   : $(cat description.txt),' >> test.json
                   if [[ "${{ github.event.client_payload.release }}" == "true" ]]
                   then
                     echo '"image"         : "default image for release"' >> test.json
@@ -35,6 +43,10 @@ jobs:
                   fi
                   echo '}' >> test.json
                 fi
+                
+#                  awk -v ORS='\\n' '1' temp.txt > temp1.txt
+#                  sed 's/\r//g' temp1.txt > temp2.txt
+
         - name: commit the file
           run: |
                 if [ "${{ github.event.client_payload.type }}" == "announcement_launched" ]
