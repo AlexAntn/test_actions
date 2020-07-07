@@ -28,9 +28,9 @@ jobs:
                   sed -nr 's/.*"summary": "(.*)", "title".*/\1/p' <temp.txt >summary.txt
                   echo $(cat summary.txt)
                   sed -nr 's/.*"description": "(.*)", "id".*/\1/p' <temp.txt >temp2.txt
-                  sed ':a;N;$!ba;s/\r//g' < temp2.txt > try.txt
+                  sed 's/\r//g' < temp2.txt > try.txt
                   echo $(cat try.txt)
-                  sed ':a;N;$!ba;s/\\r/ /g' < temp2.txt > description.txt
+                  sed 's/\\r/ /g' < temp2.txt > description.txt
                   echo $(cat description.txt)
                   echo '{' >> test.json
                   echo "\"id\"            : \"$(cat ID.txt)\"," >> test.json
