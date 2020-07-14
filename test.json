@@ -64,3 +64,13 @@ db.news.insert\(
 "image"         : "default image for release"
 }
 \);
+db.news.insert(
+{
+"id"            : "202007",
+"title"         : "YCM 0.11.2 Released",
+"date"          : "July 2020",
+"summary"       : "",
+"description"   : "YCM 0.11.2 was released today and is now available for download at: https://github.com/robotology/ycm/releases/.\n\nChanges made since YCM 0.11.1 include the following.\n\n## Modules\n### Generic Modules\n- `InstallBasicPackageFiles`: Fixed handling of `PRIVATE_DEPENDENCIES` in `install_basic_package_files` (#339).\n\n### 3rd Party\n- Fixed `FindOctave` for Octave 5 (#333, #334).\n- Fixed `FindACE` when invoked multiple times (#340).\n\n",
+"image"         : "default image for release"
+}
+);
