@@ -32,7 +32,7 @@ jobs:
                   sed -nr 's/.*"description": "(.*)", "id".*/\1/p' <temp.txt >temp2.txt
                   sed 's/\\r//g' < temp2.txt > description.txt
                   echo $(cat description.txt)
-                  echo 'db.news.insert\(' >> test.json
+                  echo 'db.news.insert(' >> test.json
                   echo '{' >> test.json
                   echo "\"id\"            : \"$(cat ID.txt)\"," >> test.json
                   echo "\"title\"         : \"$(cat title.txt)\"," >> test.json
@@ -46,7 +46,7 @@ jobs:
                     echo '"image"         : "default image for announcement"' >> test.json
                   fi
                   echo '}' >> test.json
-                  echo '\);' >> test.json
+                  echo ');' >> test.json
                 fi
                 
 #                  awk -v ORS='\\n' '1' temp.txt > temp1.txt
