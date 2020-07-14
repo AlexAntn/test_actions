@@ -46,3 +46,11 @@
 "description"   : "This is testing a release!\n\n### Brief description of the announcement\n\nIt should be true on the other side now\n\n### Detailed context\n\n- this is a list\n - it's is a list in a list\n\n\nend of test 👋 \n\nshnrtyj\n![image](https://user-images.githubusercontent.com/9463167/86467557-def90700-bd35-11ea-8067-31ee57cf39f3.png)\n\n- [ ] 1\n\n- [ ] 2\n\n- [ ] 3\n\n`some code`\n\n\n\"this breaks everything",
 "image"         : "default image for release"
 }
+{
+"id"            : "202007",
+"title"         : "YCM 0.11.2 Released",
+"date"          : "July 2020",
+"summary"       : "",
+"description"   : "YCM 0.11.2 was released today and is now available for download at: https://github.com/robotology/ycm/releases/.\n\nChanges made since YCM 0.11.1 include the following.\n\n## Modules\n### Generic Modules\n- `InstallBasicPackageFiles`: Fixed handling of `PRIVATE_DEPENDENCIES` in `install_basic_package_files` (#339).\n\n### 3rd Party\n- Fixed `FindOctave` for Octave 5 (#333, #334).\n- Fixed `FindACE` when invoked multiple times (#340).\n\n",
+"image"         : "default image for release"
+}
