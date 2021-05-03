@@ -1,0 +1,29 @@
+
+
+name: user_input_PR
+
+
+on:
+  push:
+      branches:
+          - 'add_app*'
+
+jobs:
+  trigger_appsAway:
+    runs-on: ubuntu-latest
+    steps:
+    - name: print event
+      run: echo " ${{ toJson(github.event) }}"
+      
+    - name: Parse branch name
+      id: parsed_branch
+      run: |
+        echo ::set-output name=branch::$(echo ${{ github.event.ref }} | sed -nr 's/.*refs\/heads\/(.*)/\1/p')
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.ALEX_APPS_AWAY_TOKEN }}
+        repository: AlexAntn/test_webhooks
+        event-type: user_changes
+        client-payload: '{ "type": "user_changes", "branch_name": "${{ steps.parsed_branch.outputs.branch }}" }'
+              
