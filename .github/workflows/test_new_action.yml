@@ -28,7 +28,7 @@ jobs:
             - name: Get last Superbuild version
               if: ${{ matrix.version }} == 'release' 
               id: get_version
-              run: echo ::set-output name=VERSION::release=$( if[ ${{ matrix.version }} == 'release' ]; then echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})'; else echo "master-${{ matrix.tag }}"; fi)
+              run: echo ::set-output name=VERSION::release=$( if [ ${{ matrix.version }} == 'release' ]; then echo "./SB_version.json" > VERSIONFILE_NAME && cat $(cat VERSIONFILE_NAME) | grep -Pio 'v[1-9]{1,}.{1,}(?=\"\})'; else echo "master-${{ matrix.tag }}"; fi)
 
             - name: Print result
               run: echo ${{ steps.get_version.outputs.VERSION }}
