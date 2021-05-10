@@ -17,6 +17,8 @@ jobs:
                   tag: stable
                 - version: master
                   tag: unstable
+                - version: release
+                  tag: ""
 
         steps:
             - uses: actions/checkout@v2
