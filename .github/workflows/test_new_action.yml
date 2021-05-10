@@ -12,7 +12,11 @@ jobs:
         strategy:
             matrix:
                 version: [master, release]
-                tag: [stable, unstable]
+                include:
+                - version: master
+                  tag: stable
+                - version: master
+                  tag: unstable
 
         steps:
             - uses: actions/checkout@v2
