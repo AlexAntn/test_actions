@@ -7,13 +7,13 @@ on:
     push
     
 jobs:
-  runs-on: self-hosted
-  strategy:
-    matrix:
-      version: [master, release]
-      tag: [stable, unstable]
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                version: [master, release]
+                tag: [stable, unstable]
 
-    build_and_push:
         steps:
             - uses: actions/checkout@v2
             - name: Login to DockerHub Registry
