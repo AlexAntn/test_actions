@@ -11,6 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
+                apps: [superbuild, superbuild-icubhead]
                 include:
                 - version: master
                   tag: stable
