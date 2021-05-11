@@ -12,13 +12,18 @@ jobs:
         strategy:
             matrix:
                 apps: [superbuild, superbuild-icubhead]
-                include:
-                - version: master
-                  tag: stable
-                - version: master
-                  tag: unstable
+                version: [master, release]
+                tag: [stable, unstable]
+                exclude: 
                 - version: release
-                  tag: ""
+                  tag: unstable
+#                include:
+#                - version: master
+#                  tag: stable
+#                - version: master
+#                  tag: unstable
+#                - version: release
+#                  tag: ""
 
         steps:
             - uses: actions/checkout@v2
